@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.apptiendita.HelloController">
+   <children>
+      <MenuBar fx:id="menuBar" layoutX="28.0" layoutY="14.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Catalogo">
+            <items>
+              <MenuItem fx:id="opcionRegistrarProductos" mnemonicParsing="false" text="Agregar producto" />
+                  <MenuItem mnemonicParsing="false" text="Consultar producto" />
+                  <MenuItem mnemonicParsing="false" text="Modificar productos" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar productos" />
+                  <MenuItem fx:id="opcionListarProductos" mnemonicParsing="false" text="Lista productos" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Venta">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Agregar venta" />
+                  <MenuItem mnemonicParsing="false" text="Consultar venta" />
+                  <MenuItem mnemonicParsing="false" text="Modificar venta" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar venta" />
+                  <MenuItem mnemonicParsing="false" text="Lista ventas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Inventario">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Agregar resurtido" />
+                  <MenuItem mnemonicParsing="false" text="Consultar resurtido" />
+                  <MenuItem mnemonicParsing="false" text="Modificar resurtido" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar resurtido" />
+                  <MenuItem mnemonicParsing="false" text="Lista resurtidos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Clientes">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Agregar cliente" />
+                  <MenuItem mnemonicParsing="false" text="Consultar cliente" />
+                  <MenuItem mnemonicParsing="false" text="Modificar cliente" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar cliente" />
+                  <MenuItem mnemonicParsing="false" text="Lista cliente" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Proveedores">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Agregar producto" />
+                  <MenuItem mnemonicParsing="false" text="Consultar producto" />
+                  <MenuItem mnemonicParsing="false" text="Modificar productos" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar productos" />
+                  <MenuItem mnemonicParsing="false" text="Lista productos" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Reportes">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Configuracion">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
