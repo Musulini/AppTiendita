@@ -3,7 +3,7 @@ package com.example.model;
 import com.example.interfaces.Keyable;
 
 public class Producto implements Keyable {
-    private String codigpBarras;
+    private String codigoBarras;
     private String nombre;
     private String marca;
     private String categoria;
@@ -14,7 +14,7 @@ public class Producto implements Keyable {
     private String descripcion;
     private String imagenUrl;
 
-    public Producto(String codigpBarras) {
+    public Producto(String codigoBarras) {
     }
 
     public Producto(){
@@ -23,16 +23,16 @@ public class Producto implements Keyable {
 
     @Override
     public String getKey() {
-        return codigpBarras;
+        return codigoBarras;
     }
 
-    public String getCodigpBarras() {
-        return codigpBarras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
 
-    public void setCodigpBarras(String codigpBarras) {
-        this.codigpBarras = codigpBarras;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
     public String getNombre() {
@@ -125,7 +125,7 @@ public class Producto implements Keyable {
         if (this == obj) return false;
 
         if (obj instanceof Keyable k)
-            if (k.getKey().equals(this.getCodigpBarras()))
+            if (k.getKey().equals(this.getCodigoBarras()))
                 return true;
         return false;
     }

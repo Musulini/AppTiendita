@@ -3,20 +3,16 @@ package com.example.apptiendita;
 import com.example.interfaces.Operable;
 import com.example.model.Producto;
 import com.example.vista.PanelCapturaProductos;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-
-public class HelloController {
+public class MainController {
     @FXML
     private MenuBar menuBar;
     public MenuBar getMenuBar(){return menuBar;}
