@@ -34,6 +34,7 @@
                   <MenuItem mnemonicParsing="false" text="Modificar resurtido" />
                   <MenuItem mnemonicParsing="false" text="Eliminar resurtido" />
                   <MenuItem mnemonicParsing="false" text="Lista resurtidos" />
+                  <MenuItem fx:id="resMensualItem" mnemonicParsing="false" text="Resurtido Mensual" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Clientes">

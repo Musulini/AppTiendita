@@ -12,4 +12,10 @@ public interface Operable<T> {
     List<T> getAll();
     boolean addAll(List<? extends T> items);
     boolean isEmpty();
+
+	boolean getKeyPosition(String text);
+
+    default double calculate(){
+        return 0;
+    }
 }

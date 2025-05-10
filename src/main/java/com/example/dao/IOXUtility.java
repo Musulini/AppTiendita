@@ -1,8 +1,8 @@
 package com.example.dao;
 
 import com.example.model.Producto;
+import javafx.scene.control.Alert;
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +11,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static com.example.utility.UserMessage.message;
 
 public class IOXUtility {
 
@@ -114,9 +116,9 @@ public class IOXUtility {
 							producto.getImagenUrl()));
 				}
 			}
-			JOptionPane.showMessageDialog(null, "Datos guardados exitosamente");
+			message("Salida", "Datos guardados exitosamente", Alert.AlertType.INFORMATION);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Error al guardar los datos del archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			message("Error", "Hubo un error al guardar datos del archivo"+e.getMessage(), Alert.AlertType.ERROR);
 		}
 	}
 }

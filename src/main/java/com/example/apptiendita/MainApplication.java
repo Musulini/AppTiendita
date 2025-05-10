@@ -7,14 +7,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuBar;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-
 import static com.example.dao.IOXUtility.*;
+import static com.example.utility.UserMessage.message;
 
+import java.io.File;
 import java.io.IOException;
 
 public class MainApplication extends Application {
@@ -51,9 +52,9 @@ public class MainApplication extends Application {
 		stage.setOnCloseRequest(event -> {
 			try {
 				saveData(FILE_PATH, catalogo.getAll());
-				JOptionPane.showMessageDialog(null, "Datos respaldados");
+				message("Salida", "Datos Respaldados", Alert.AlertType.INFORMATION);
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
+				message("Error", e.getMessage(), Alert.AlertType.ERROR);
 			}
 		});
 

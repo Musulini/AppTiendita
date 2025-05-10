@@ -46,11 +46,11 @@ public class Contenedor<T extends Keyable> implements Operable<T> {
         return contenedor.indexOf(item);
     }
 
-    public int getPosition(String key) {
+    public boolean getKeyPosition(String key) {
         for (int i = 0; i < contenedor.size(); i++)
             if (contenedor.get(i).getKey().equals(key))
-                return i;
-        return -1;
+                return true;
+        return false;
     }
 
     @Override

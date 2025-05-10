@@ -7,20 +7,18 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.lang.reflect.Field;
+import static com.example.utility.UserMessage.message;
 
 public class PanelCapturaProductos extends Application {
-	private Operable<Producto> catalogo;
-	private TextField titulo;
+	private final Operable<Producto> catalogo;
 	private TextField codigoDeBarras;
 	private TextField nombreField;
 	private TextField marcaField;
@@ -31,8 +29,6 @@ public class PanelCapturaProductos extends Application {
 	private ComboBox<String> presentacionCombo;
 	private CheckBox activoCheckBox;
 	private TextField imageURLField;
-	private Button guardarButton;
-	private Button limpiarButton;
 
 	public PanelCapturaProductos(Operable<Producto> catalogo) {
 		this.catalogo = catalogo;
@@ -41,12 +37,11 @@ public class PanelCapturaProductos extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		// Título del formulario
-		titulo = new TextField("Captura de productos");
+		Label titulo = new Label("Captura de productos");
 		titulo.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 
 		// Crear campos del formulario
 		codigoDeBarras = new TextField();
-		codigoDeBarras.requestFocus();
 		nombreField = new TextField();
 		marcaField = new TextField();
 		descripcionArea = new TextArea();
@@ -60,37 +55,49 @@ public class PanelCapturaProductos extends Application {
 		activoCheckBox = new CheckBox();
 		imageURLField = new TextField();
 
+		codigoDeBarras.setOnKeyPressed(event -> {
+			onEnterKeyPressed(nombreField, event);
+		});
+		nombreField.setOnKeyPressed(event -> {
+			onEnterKeyPressed(nombreField, event);
+		});
+		marcaField.setOnKeyPressed(event -> {
+			onEnterKeyPressed(nombreField, event);
+
+		});
+		unidadDeMedida.setOnKeyPressed(event -> {
+			onEnterKeyPressed(nombreField, event);
+		});
+		activoCheckBox.setOnKeyPressed(event -> {
+			onEnterKeyPressed(nombreField, event);
+		});
+
 		// Botones
-		guardarButton = new Button("Guardar");
-		limpiarButton = new Button("Limpiar");
+		Button guardarButton = new Button("Guardar");
+		Button limpiarButton = new Button("Limpiar");
 
 		// Acciones de los botones
 		guardarButton.setOnAction(e -> {
-			// Lógica para guardar el producto
-			if (cajasLlenas()) {
-				if (catalogo.contains(new Producto(codigoDeBarras.getText()))) {
-					JOptionPane.showMessageDialog(null, "El producto ya existe", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-
-					Producto producto = new Producto(codigoDeBarras.getText());
-					producto.setNombre(nombreField.getText());
-					producto.setMarca(marcaField.getText());
-					producto.setDescripcion(descripcionArea.getText());
-					producto.setCategoria(categoriaCombo.getValue());
-					producto.setUnidadMedida(unidadDeMedida.getValue());
-					producto.setContenido(contenidoField.getText());
-					producto.setPresentacion(presentacionCombo.getValue());
-					producto.setActivo(activoCheckBox.isSelected());
-					producto.setImagenUrl(imageURLField.getText());
-
-					if (catalogo.add(producto)) {
-						JOptionPane.showMessageDialog(null, "Producto agregadp", "Operación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+			// Validando LENGTH DEL CODIGO DE BARRAS
+			if (validBarCode()) {
+				// Lógica para guardar el producto
+				if (cajasLlenas()) {
+					if (catalogo.contains(new Producto(codigoDeBarras.getText()))) {
+						message("Error", "El producto ya existe", Alert.AlertType.ERROR);
 					} else {
-						JOptionPane.showMessageDialog(null, "Error al agregar producto", "Error", JOptionPane.ERROR_MESSAGE);
+						Producto producto = getProducto();
+
+						if (catalogo.add(producto)) {
+							message("Mensaje", "Producto agregado correctamente", Alert.AlertType.INFORMATION);
+						} else {
+							message("Error", "Hubo un error al agregar el producto", Alert.AlertType.ERROR);
+						}
 					}
+				} else {
+					message("Error", "Debe llenar todos los campos", Alert.AlertType.WARNING);
+					codigoDeBarras.requestFocus();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
 				codigoDeBarras.requestFocus();
 			}
 		});
@@ -149,15 +156,23 @@ public class PanelCapturaProductos extends Application {
 		Scene scene = new Scene(root, 600, 600);
 		primaryStage.setTitle("Captura de productos");
 		primaryStage.setScene(scene);
+
 		primaryStage.show();
+	}
 
-		final int[] childrenCount = {0};
-		grid.setOnKeyPressed(event -> {
-			if (event.getCode() == KeyCode.ENTER) {
-				grid.getChildren().get(childrenCount[0] += 2).requestFocus();
-			}
-		});
-
+	private Producto getProducto() {
+		Producto producto = new Producto(codigoDeBarras.getText());
+		producto.setCodigoBarras(codigoDeBarras.getText());
+		producto.setNombre(nombreField.getText());
+		producto.setMarca(marcaField.getText());
+		producto.setDescripcion(descripcionArea.getText());
+		producto.setCategoria(categoriaCombo.getValue());
+		producto.setUnidadMedida(unidadDeMedida.getValue());
+		producto.setContenido(contenidoField.getText());
+		producto.setPresentacion(presentacionCombo.getValue());
+		producto.setActivo(activoCheckBox.isSelected());
+		producto.setImagenUrl(imageURLField.getText());
+		return producto;
 	}
 
 	private boolean cajasLlenas() {
@@ -169,6 +184,28 @@ public class PanelCapturaProductos extends Application {
 				!contenidoField.getText().isEmpty() &&
 				!presentacionCombo.getValue().isEmpty() &&
 				!imageURLField.getText().isEmpty();
+	}
+
+	private void onEnterKeyPressed(TextInputControl input, KeyEvent event) {
+		if (event.getCode() == KeyCode.ENTER) {
+			if (validBarCode()) {
+				input.requestFocus();
+			}
+		}
+	}
+
+	private boolean validBarCode() {
+		if (codigoDeBarras.getText().length() == 15 && codigoDeBarras.getText().matches("[0-9]+")) {
+			if (!catalogo.getKeyPosition(codigoDeBarras.getText())) {
+				return true;
+			} else {
+				message("Error", "El producto ya existe", Alert.AlertType.ERROR);
+			}
+			return true;
+		}
+
+		message("Error", "El codigo de barras debe ser de 15 caracteres numericos", Alert.AlertType.ERROR);
+		return false;
 	}
 
 	public static void main(String[] args) {

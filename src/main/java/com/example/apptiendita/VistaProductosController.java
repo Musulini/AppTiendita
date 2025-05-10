@@ -2,22 +2,16 @@ package com.example.apptiendita;
 
 
 import com.example.interfaces.Operable;
-import com.example.model.Contenedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import com.example.model.Producto;
 
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-
-import static com.example.dao.IOXUtility.loadDataX;
+import static com.example.utility.UserMessage.message;
 
 public class VistaProductosController {
 
@@ -85,7 +79,7 @@ public class VistaProductosController {
 			productos.addAll(catalogo.getAll());
 			tablaProductos.setItems(productos);
 		} else {
-			JOptionPane.showMessageDialog(null, "No hay productos en el catalogo");
+			message("Vista Productos", "No hay productos en el catalogo", Alert.AlertType.INFORMATION);
 		}
 	}
 

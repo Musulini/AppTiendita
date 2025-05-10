@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+    <TableView fx:id="refilledList">
+        <columns>
+            <TableColumn fx:id="columnaCodigo" text="Código de Barras" />
+            <TableColumn fx:id="columnaNombre" text="Nombre del Producto" />
+            <TableColumn fx:id="columnaFecha" text="Fecha de resurtido" />
+            <TableColumn fx:id="columnaCantidad" text="Cantidad" />
+        </columns>
+    </TableView>
+</VBox>
